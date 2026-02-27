@@ -1,0 +1,1 @@
+kargs = ["audit=0", "quiet", "rhgb", "thinkpad_acpi.fan_control=1"]

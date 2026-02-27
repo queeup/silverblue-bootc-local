@@ -1,0 +1,6 @@
+enable tailscaled.service
+enable btrfs-scrub@-.timer
+enable bpftune.service
+
+disable auditd.service
+disable bootc-fetch-apply-updates.timer

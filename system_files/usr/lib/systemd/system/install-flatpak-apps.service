@@ -1,0 +1,47 @@
+[Unit]
+Description=Install flatpak apps
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/%N.stamp
+
+[Service]
+Type=oneshot
+TimeoutStartSec=infinity
+ExecStart=/usr/bin/flatpak install --system --assumeyes flathub \
+    app.fotema.Fotema \
+    com.bitwarden.desktop \
+    com.discordapp.Discord \
+    com.github.jeromerobert.pdfarranger \
+    com.github.qarmin.czkawka \
+    com.github.qarmin.szyszka \
+    com.github.tchx84.Flatseal \
+    de.haeckerfelix.Fragments \
+    im.riot.Riot \
+    io.github.celluloid_player.Celluloid \
+    io.github.nokse22.inspector \
+    io.github.nozwock.Packet \
+    io.github.shiftey.Desktop \
+    org.bleachbit.BleachBit \
+    org.freedesktop.Platform.ffmpeg-full//24.08 \
+    org.gnome.baobab \
+    org.gnome.Boxes \
+    org.gnome.Calculator \
+    org.gnome.Calendar \
+    org.gnome.clocks \
+    org.gnome.Decibels \
+    org.gnome.FileRoller \
+    org.gnome.Geary \
+    org.gnome.Logs \
+    org.gnome.Loupe \
+    org.gnome.NautilusPreviewer \
+    org.gnome.NetworkDisplays \
+    org.gnome.Papers \
+    org.gnome.seahorse.Application \
+    org.gnome.TextEditor \
+    org.gnome.Weather \
+    org.localsend.localsend_app \
+    org.mozilla.firefox \
+    org.onlyoffice.desktopeditors \
+    org.telegram.desktop \
+    org.upscayl.Upscayl
+ExecStartPost=/bin/touch /var/lib/%N.stamp

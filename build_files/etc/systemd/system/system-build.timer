@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily automatic builds for custom bootc image
+
+[Timer]
+OnCalendar=daily
+OnBootSec=15min
+
+[Install]
+WantedBy=timers.target

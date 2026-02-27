@@ -1,0 +1,12 @@
+[Build]
+Arch=amd64
+ImageTag=localhost/system-image
+Pull=newer
+SetWorkingDirectory=/etc/system-image
+PodmanArgs=--squash
+
+[Service]
+ExecStartPost=/usr/bin/bootc switch --quiet --transport=containers-storage localhost/system-image:latest
+ExecStartPost=/usr/bin/bootc update --quiet
+ExecStartPost=-/usr/bin/podman image prune --force --filter=label=containers.bootc=1
+Nice=0

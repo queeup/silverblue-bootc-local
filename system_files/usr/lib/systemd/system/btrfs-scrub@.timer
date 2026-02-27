@@ -1,0 +1,11 @@
+[Unit]
+Description=Btrfs scrub timer on %f
+
+[Timer]
+OnCalendar=*-*-1,15
+AccuracySec=1d
+RandomizedDelaySec=1w
+Persistent=true
+
+[Install]
+WantedBy=timers.target

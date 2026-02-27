@@ -1,0 +1,14 @@
+[Unit]
+Description=Install nix package manager
+Documentation=https://github.com/NixOS/nix-installer
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/%N.stamp
+ConditionPathExists=!/var/lib/nix
+ConditionPathExists=/nix
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install ostree --no-confirm --add-channel --persistence=/var/lib/nix"
+ExecStartPost=/bin/sh -c 'mkdir -p /etc/sudoers.d && echo "Defaults  secure_path = /nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:$(printenv PATH)" | /bin/tee /etc/sudoers.d/99-nix'
+ExecStartPost=/bin/touch /var/lib/%N.stamp

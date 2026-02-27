@@ -1,0 +1,15 @@
+[Unit]
+Description=Btrfs scrub on %f
+Documentation=man:btrfs-scrub(8)
+Documentation=https://www.jwillikers.com/btrfs-scrub
+ConditionPathIsMountPoint=%f
+RequiresMountsFor=%f
+Before=shutdown.target sleep.target
+Conflicts=shutdown.target sleep.target
+
+[Service]
+Nice=19
+IOSchedulingClass=idle
+KillSignal=SIGINT
+ExecStart=/usr/bin/btrfs scrub start -B %f
+ExecStop=/bin/sh -c "(btrfs scrub status %f | grep finished) || btrfs scrub cancel %f"
